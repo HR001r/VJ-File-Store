@@ -89,19 +89,19 @@ async def start(client, message):
         if str(message.from_user.id) != str(userid):
             return await message.reply_text(
                 text="<b>Invalid link or Expired link !</b>",
-                protect_content=True
+                protect_content=False
             )
         is_valid = await check_token(client, userid, token)
         if is_valid == True:
             await message.reply_text(
                 text=f"<b>Hey {message.from_user.mention}, You are successfully verified !\nNow you have unlimited access for all files till today midnight.</b>",
-                protect_content=True
+                protect_content=False
             )
             await verify_user(client, userid, token)
         else:
             return await message.reply_text(
                 text="<b>Invalid link or Expired link !</b>",
-                protect_content=True
+                protect_content=False
             )
     elif data.split("-", 1)[0] == "BATCH":
         try:
@@ -113,7 +113,7 @@ async def start(client, message):
                 ]]
                 await message.reply_text(
                     text="<b>You are not verified !\nKindly verify to continue !</b>",
-                    protect_content=True,
+                    protect_cois_val=False,
                     reply_markup=InlineKeyboardMarkup(btn)
                 )
                 return
@@ -202,7 +202,7 @@ async def start(client, message):
                 continue
             await asyncio.sleep(1) 
         await sts.delete()
-        if AUTO_DELETE_MODE == True:
+        if AUTO_DELETE_MODE == False:
             k = await client.send_message(chat_id = message.from_user.id, text=f"<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nThis Movie File/Video will be deleted in <b><u>{AUTO_DELETE} minutes</u> 🫥 <i></b>(Due to Copyright Issues)</i>.\n\n<b><i>Please forward this File/Video to your Saved Messages and Start Download there</b>")
             await asyncio.sleep(AUTO_DELETE_TIME)
             for x in filesarr:
@@ -228,7 +228,7 @@ async def start(client, message):
             ]]
             await message.reply_text(
                 text="<b>You are not verified !\nKindly verify to continue !</b>",
-                protect_content=True,
+                protect_content=False,
                 reply_markup=InlineKeyboardMarkup(btn)
             )
             return
